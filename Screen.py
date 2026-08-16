@@ -5,7 +5,7 @@ import random
 screen = pygame.display.set_mode(
         (WINDOW_WIDTH, WINDOW_HEIGHT))
 
-def generate_bush(field_screen):
+def generate_bush():
     bush_locations = []
 
     for bush in range(NUM_OF_LANDMINES):
@@ -40,17 +40,20 @@ def calc_col(x):
 def create_field():
         return [[EMPTY for i in range(NUM_OF_COLS)] for j in range(NUM_OF_ROWS)]
 
-def add_bushes(bush_locations):
+def add_bushes_to_screen(bush_locations):
+        bush_image = pygame.image.load(GRASS)
+        bush_image = pygame.transform.scale(bush_image, (LANDMINE_WIDTH, LANDMINE_HEIGHT))
+        for place in bush_locations:
+                bush_image_rect = bush_image.get_rect(
+                        center=(place[0], place[1]))
+                screen.blit(bush_image, bush_image_rect)
 
-def draw_game(screen):
+
+def draw_game_field(screen):
         screen.fill(FIELD_BACKGROUND_COLOR)
         pygame.display.flip()
+        bush_locations= generate_bush()
         global field_screen
         field_screen= create_field()
-        field_screen=generate_bush(field_screen)
-
-bubble_image = pygame.image.load(bubble["image"])
-    bubble_image = pygame.transform.scale(bubble_image, (consts.BUBBLE_WIDTH, consts.BUBBLE_HEIGHT))
-    bubble_image_rect = bubble_image.get_rect(
-            center=(bubble["center_x"], bubble["center_y"]))
-    screen.blit(bubble_image, bubble_image_rect)
+        field_screen=add_bushes_to_grid(bush_locations)
+        add_bushes_to_screen(bush_locations)
