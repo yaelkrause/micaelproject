@@ -1,4 +1,5 @@
 import pygame
+from game_field import *
 from consts import *
 
 screen = pygame.display.set_mode(
@@ -23,6 +24,12 @@ def draw_underground_screen():
     for col in range(NUM_OF_COLS):
             pygame.draw.line(screen, UNDERGROUND_GRID_COLOR, start_pos=(calc_x(col), 0),
                              end_pos=(calc_x(col), WINDOW_HEIGHT))
+
+    landmines_locations = generate_landmines()
+    landmine = pygame.image.load('mine_png')
+    sized_landmine = pygame.transform.scale(landmine, (LANDMINE_WIDTH, LANDMINE_HEIGHT))
+    for mine in landmines_locations:
+        landmine
 
     pygame.display.flip()
     pygame.time.wait(1000)
