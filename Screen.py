@@ -2,7 +2,7 @@ from consts import *
 import pygame
 import random
 
-booly = False
+draw_game_field_bool = False
 screen = pygame.display.set_mode(
         (WINDOW_WIDTH, WINDOW_HEIGHT))
 
@@ -27,7 +27,7 @@ def add_bushes_to_grid(bush_locations):
     for bush in bush_locations:
         col1 = calc_col(bush[0])
         row1 = calc_row(bush[1])
-        for i in range(col1, col1+1):
+        for i in range(col1, col1+3):
             field_screen[row1][i] = BUSH
         return field_screen
 
@@ -53,7 +53,7 @@ def bush_img_create():
         return bush_image
 
 def draw_game_field(screen):
-        if not booly:
+        if not draw_game_field_bool:
                 screen.fill(FIELD_BACKGROUND_COLOR)
                 bush_locations= generate_bush()
                 global field_screen
@@ -62,7 +62,7 @@ def draw_game_field(screen):
                 bush_img= bush_img_create()
                 add_bushes_to_screen(bush_locations, bush_img)
                 pygame.display.flip()
-                booly = True
+                draw_game_field_bool=True
         else:
                 screen.fill(FIELD_BACKGROUND_COLOR)
                 add_bushes_to_screen(bush_locations, bush_img)
