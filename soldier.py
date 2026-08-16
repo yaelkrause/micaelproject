@@ -30,7 +30,7 @@ def up(knight):
                 knight[i][j]= (new,knight[i][j][0])
     return knight
 
-def up(knight):
+def down(knight):
     new_one = knight[0][1][0]
     if new_one < NUM_OF_ROWS:
         for i in range(KNIGHT_ROW):
