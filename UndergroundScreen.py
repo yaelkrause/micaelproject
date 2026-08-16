@@ -1,5 +1,4 @@
 import pygame
-import game_field
 from consts import *
 
 screen = pygame.display.set_mode(

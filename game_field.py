@@ -1,10 +1,11 @@
 import random
 from consts import *
 
+
 game_grid = []
 
 
-def create():
+def grid_create():
     for row1 in range(NUM_OF_ROWS):
         grid_row = []
 

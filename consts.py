@@ -12,9 +12,7 @@ UNDERGROUND_GRID_COLOR = (102, 255, 0)
 
 GRASS = "grass.png"
 LANDMINE_IMAGE = 'mine.png'
-KNIGHT_ROW=4
-KNIGHT_COL=2
-
+SOLDIER = 'soldier.png'
 EMPTY = 0
 LANDMINE = 1
 BUSH = 0
