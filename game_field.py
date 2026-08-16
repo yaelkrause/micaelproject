@@ -2,7 +2,6 @@ import random
 from consts import *
 
 game_grid = []
-landmines_locations = []
 
 
 def create():
@@ -15,18 +14,20 @@ def create():
         game_grid.append(grid_row)
 
 
-def generate_landmines():
+def generate_locations(locations):
     for mine in range(NUM_OF_LANDMINES):
-        x = random.randint(1, WINDOW_WIDTH - 3 * CELL_SIZE)
-        y = random.randint(CELL_SIZE, WINDOW_HEIGHT)
-        landmine_location = (x, y)
+        x = random.randint(CELL_SIZE, WINDOW_WIDTH - 3 * CELL_SIZE)
+        y = random.randint(CELL_SIZE, WINDOW_HEIGHT - CELL_SIZE)
+        location = (x, y)
 
-        while landmine_location in landmines_locations:
-            x = random.randint(1, WINDOW_WIDTH - 3 * CELL_SIZE)
-            y = random.randint(CELL_SIZE, WINDOW_HEIGHT)
-            landmine_location = (x, y)
+        while location in locations:
+            x = random.randint(CELL_SIZE, WINDOW_WIDTH - 3 * CELL_SIZE)
+            y = random.randint(CELL_SIZE, WINDOW_HEIGHT - CELL_SIZE)
+            location = (x, y)
 
-        landmines_locations.append(landmine_location)
+        locations.append(location)
+
+    return locations
 
 
 def calc_row(y):
@@ -37,17 +38,9 @@ def calc_col(x):
     return x//CELL_SIZE
 
 
-def add_landmines_to_grid():
-    for mine in landmines_locations:
+def add_objects_to_grid(locations):
+    for mine in locations:
         col1 = calc_col(mine[0])
         row1 = calc_row(mine[1])
         for i in range(col1, col1+3):
             game_grid[row1][i] = LANDMINE
-
-
-'''for row in range(len(game_grid)):
-    for col in range(len(game_grid[row])):
-        if col != len(game_grid[row])-1:
-            print(game_grid[row][col], end=' ')
-        else:
-            print(game_grid[row][col])'''
