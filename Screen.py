@@ -2,6 +2,7 @@ from consts import *
 import pygame
 import random
 
+bool=False
 screen = pygame.display.set_mode(
         (WINDOW_WIDTH, WINDOW_HEIGHT))
 
@@ -40,20 +41,30 @@ def calc_col(x):
 def create_field():
         return [[EMPTY for i in range(NUM_OF_COLS)] for j in range(NUM_OF_ROWS)]
 
-def add_bushes_to_screen(bush_locations):
+def add_bushes_to_screen(bush_locations, bush_img):
+        for place in bush_locations:
+                bush_image_rect = bush_img.get_rect(
+                        center=(place[0], place[1]))
+                screen.blit(bush_img, bush_image_rect)
+
+def bush_img_create():
         bush_image = pygame.image.load(GRASS)
         bush_image = pygame.transform.scale(bush_image, (LANDMINE_WIDTH, LANDMINE_HEIGHT))
-        for place in bush_locations:
-                bush_image_rect = bush_image.get_rect(
-                        center=(place[0], place[1]))
-                screen.blit(bush_image, bush_image_rect)
-
+        return bush_image
 
 def draw_game_field(screen):
-        screen.fill(FIELD_BACKGROUND_COLOR)
-        pygame.display.flip()
-        bush_locations= generate_bush()
-        global field_screen
-        field_screen= create_field()
-        field_screen=add_bushes_to_grid(bush_locations)
-        add_bushes_to_screen(bush_locations)
+        if not bool:
+                screen.fill(FIELD_BACKGROUND_COLOR)
+                bush_locations= generate_bush()
+                global field_screen
+                field_screen= create_field()
+                field_screen=add_bushes_to_grid(bush_locations)
+                bush_img= bush_img_create()
+                add_bushes_to_screen(bush_locations, bush_img)
+                pygame.display.flip()
+                bool=True
+        else:
+                screen.fill(FIELD_BACKGROUND_COLOR)
+                add_bushes_to_screen(bush_locations, bush_img)
+                pygame.display.flip()
+
