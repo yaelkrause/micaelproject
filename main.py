@@ -1,14 +1,15 @@
 import pygame
-
 import Screen
 import UndergroundScreen
 import game_field
 import soldier
 
+
 def main():
     pygame.init()
 
     game_grid = game_field.grid_create()
+    knight_grid = soldier.create_knight_grid()
 
     running = True
 
@@ -21,12 +22,11 @@ def main():
     grass_locations = []
     game_field.generate_locations(grass_locations)
 
-    Screen.draw_screen(grass_locations)
-
     # print welcome mess
+    Screen.draw_screen(grass_locations, knight_grid)
     Screen.draw_welcome_message()
 
-    Screen.draw_screen(grass_locations)
+    Screen.draw_screen(grass_locations, knight_grid)
 
     while running:
 
@@ -35,19 +35,17 @@ def main():
                 running = False
 
             if event.type == pygame.KEYDOWN:
-                UndergroundScreen.draw_underground_screen(landmines_locations)
+                UndergroundScreen.draw_underground_screen(landmines_locations, knight_grid)
+                Screen.draw_screen(grass_locations, knight_grid)
 
-            dr, dc = 0, 0
-
-            if event.key == pygame.K_UP:
-                dr = -1
-            elif event.key == pygame.K_DOWN:
-                dr = 1
-            elif event.key == pygame.K_LEFT:
-                dc = -1
-            elif event.key == pygame.K_RIGHT:
-                dc = 1
-
+            if pygame.key == pygame.K_UP:
+                knight_grid = soldier.up(knight_grid)
+            elif pygame.key == pygame.K_DOWN:
+                knight_grid = soldier.down(knight_grid)
+            elif pygame.key == pygame.K_LEFT:
+                knight_grid = soldier.left(knight_grid)
+            elif pygame.key == pygame.K_RIGHT:
+                knight_grid = soldier.right(knight_grid)
 
         pygame.display.flip()
 

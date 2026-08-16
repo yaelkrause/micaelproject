@@ -17,15 +17,24 @@ def grid_create():
 
 def generate_locations(locations):
     for mine in range(NUM_OF_LANDMINES):
-        x = random.randint(CELL_SIZE, WINDOW_WIDTH - 3 * CELL_SIZE)
-        y = random.randint(CELL_SIZE, WINDOW_HEIGHT - CELL_SIZE)
+        x = random.randint(LANDMINE_WIDTH, WINDOW_WIDTH - 3 * CELL_SIZE)
+        y = random.randint(LANDMINE_HEIGHT, WINDOW_HEIGHT - CELL_SIZE)
+
+        while True: #making sure they're not on one another
+            x_locations = [location[0] for location in locations]
+            y_locations = [location[1] for location in locations]
+
+            for i in range(x, x+4):
+                if i in x_locations:
+                    x = random.randint(CELL_SIZE, WINDOW_WIDTH - 3 * CELL_SIZE)
+                    y = random.randint(CELL_SIZE, WINDOW_HEIGHT - CELL_SIZE)
+            if y in y_locations:
+                x = random.randint(CELL_SIZE, WINDOW_WIDTH - 3 * CELL_SIZE)
+                y = random.randint(CELL_SIZE, WINDOW_HEIGHT - CELL_SIZE)
+            else:
+                break
+
         location = (x, y)
-
-        while location in locations:
-            x = random.randint(CELL_SIZE, WINDOW_WIDTH - 3 * CELL_SIZE)
-            y = random.randint(CELL_SIZE, WINDOW_HEIGHT - CELL_SIZE)
-            location = (x, y)
-
         locations.append(location)
 
     return locations
