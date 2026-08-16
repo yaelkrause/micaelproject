@@ -2,7 +2,7 @@ from consts import *
 import pygame
 import random
 
-bool=False
+booly = False
 screen = pygame.display.set_mode(
         (WINDOW_WIDTH, WINDOW_HEIGHT))
 
@@ -53,7 +53,7 @@ def bush_img_create():
         return bush_image
 
 def draw_game_field(screen):
-        if not bool:
+        if not booly:
                 screen.fill(FIELD_BACKGROUND_COLOR)
                 bush_locations= generate_bush()
                 global field_screen
@@ -62,7 +62,7 @@ def draw_game_field(screen):
                 bush_img= bush_img_create()
                 add_bushes_to_screen(bush_locations, bush_img)
                 pygame.display.flip()
-                bool=True
+                booly = True
         else:
                 screen.fill(FIELD_BACKGROUND_COLOR)
                 add_bushes_to_screen(bush_locations, bush_img)

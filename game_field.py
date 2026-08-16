@@ -45,13 +45,9 @@ def add_landmines_to_grid():
             game_grid[row1][i] = LANDMINE
 
 
-create()
-add_landmines_to_grid()
-
-
-for row in range(len(game_grid)):
+'''for row in range(len(game_grid)):
     for col in range(len(game_grid[row])):
         if col != len(game_grid[row])-1:
             print(game_grid[row][col], end=' ')
         else:
-            print(game_grid[row][col])
+            print(game_grid[row][col])'''
