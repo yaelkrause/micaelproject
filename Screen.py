@@ -16,5 +16,10 @@ def draw_bush():
                         center=(random_x, random_y))
                 screen.blit(bush_image, bush_image_rect)
 
+def create_field():
+        return [[EMPTY for i in range(NUM_OF_COLS)] for j in range(NUM_OF_ROWS)]
+
 def draw_game(game_state):
         screen.fill(FIELD_BACKGROUND_COLOR)
+        global field_screen
+        field_screen= create_field()
