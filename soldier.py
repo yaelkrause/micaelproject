@@ -39,6 +39,10 @@ def down(knight):
                 knight[i][j]= (new,knight[i][j][0])
     return knight
 
+def hit_landmine():
+    #return True if legs hit landmine
+    pass
+
 knight=create_knight_grid()
 knight=right(knight)
 knight=left(knight)
