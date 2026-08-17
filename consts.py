@@ -19,6 +19,8 @@ LANDMINE_IMAGE = 'mine.png'
 SOLDIER = 'soldier.png'
 UNDERGROUND_SOLDIER = 'soldier_night.png'
 EXPLOSION = 'explosion.png'
+INJURED_SOLDIER = 'injury.png'
+
 EMPTY = 0
 LANDMINE = 1
 BUSH = 0

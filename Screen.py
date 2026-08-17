@@ -2,7 +2,6 @@ from consts import *
 import pygame
 
 
-clock = pygame.time.Clock()
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
 
@@ -18,7 +17,6 @@ def draw_screen(locations, knight):
     draw_soldier(SOLDIER, knight['x'], knight['y'])
 
     pygame.display.flip()
-    clock.tick(30)
 
 
 def draw_welcome_message():
@@ -43,3 +41,26 @@ def add_flag_to_grid(game_grid):
     for r in range(start_row, NUM_OF_ROWS):
         for c in range(start_col, NUM_OF_COLS):
             game_grid[r][c] = FLAG
+
+def draw_explosion(x, y):
+    explosion = pygame.image.load(EXPLOSION)
+    sized_explosion = pygame.transform.scale(explosion, (SOLDIER_WIDTH, LANDMINE_HEIGHT))
+    explosion_image_rect = sized_knight.get_rect(topleft=(x, y))
+    screen.blit(sized_knight, knight_image_rect)
+
+
+def draw_win_lose_message(string):
+    font = pygame.font.SysFont("Arial", 50)
+    txt_surface = font.render(string, True, color=(0, 0, 0))
+    screen.blit(txt_surface, (200, WINDOW_HEIGHT / 2))
+    pygame.display.flip()
+    pygame.time.delay(3000)
+
+
+if soldier.check_collision(soldier.get_legs_cells(knight), game_field.game_grid, LANDMINE):
+    Screen.draw_win_lose_message("Game Over! You hit a landmine.")
+    running = False
+
+elif soldier.check_collision(soldier.get_body_cells(knight), game_field.game_grid, FLAG):
+    Screen.draw_win_lose_message("Victory! You reached the flag.")
+    running = False

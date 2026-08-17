@@ -1,3 +1,4 @@
+import pygame
 from consts import *
 
 def create_soldier():
