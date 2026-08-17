@@ -5,8 +5,6 @@ def create_soldier():
     return {
         "x": 0,
         "y": 0,
-        "width_in_cells": 2,
-        "height_in_cells": 4,
         "width": 2 * CELL_SIZE,
         "height": 4 * CELL_SIZE,
         "speed": CELL_SIZE

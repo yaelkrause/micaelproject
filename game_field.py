@@ -57,7 +57,7 @@ def add_objects_to_grid(locations):
     for mine in locations:
         col1 = calc_col(mine[0])
         row1 = calc_row(mine[1])
-        for i in range(col1, min(col1 + 3, NUM_OF_COLS)):
+        for i in range(col1, col1 + 3):
             if row1 in range(NUM_OF_ROWS):
                 game_grid[row1][i] = LANDMINE
 

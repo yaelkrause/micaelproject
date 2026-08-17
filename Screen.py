@@ -1,4 +1,5 @@
 from consts import *
+import UndergroundScreen
 import pygame
 
 
@@ -14,7 +15,7 @@ def draw_screen(locations, knight, img):
         grass_image_rect = sized_grass.get_rect(topleft=(grass[0], grass[1]))
         screen.blit(sized_grass, grass_image_rect)
 
-    draw_flag(FLAG_IMAGE, (NUM_OF_COLS - 4) * CELL_SIZE, (NUM_OF_ROWS - 3.5) * CELL_SIZE)
+    draw_flag()
     draw_soldier(img, knight['x'], knight['y'])
 
     pygame.display.flip()
@@ -36,10 +37,11 @@ def draw_soldier(img, x, y):
     screen.blit(sized_knight, knight_image_rect)
 
 
-def draw_flag(img, x, y):
-    flag = pygame.image.load(img)
+def draw_flag():
+    flag = pygame.image.load(FLAG_IMAGE)
     sized_flag = pygame.transform.scale(flag, (4 * CELL_SIZE, 3 * CELL_SIZE))
-    flag_image_rect = sized_flag.get_rect(topleft=(x, y))
+    flag_image_rect = sized_flag.get_rect(topleft=(UndergroundScreen.calc_x(NUM_OF_COLS - 4),
+                                                   UndergroundScreen.calc_y(NUM_OF_ROWS - 4.5)))
     screen.blit(sized_flag, flag_image_rect)
 
 
