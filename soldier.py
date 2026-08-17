@@ -1,5 +1,5 @@
-import pygame
 from consts import *
+import game_field
 
 def create_soldier():
     return {
@@ -26,20 +26,19 @@ def move_soldier(soldier, direction):
 
 
 def get_legs_cells(soldier):
-    col = soldier["x"] // CELL_SIZE
-    row = soldier["y"] // CELL_SIZE
-    return [(row + 3, col), (row + 3, col + 1)]
+    col = game_field.calc_col(soldier['x'])
+    row = game_field.calc_row(soldier['y'])
+    return [(row + 4, col), (row + 4, col + 1)]
 
 
 def get_body_cells(soldier):
-    col = soldier["x"] // CELL_SIZE
-    row = soldier["y"] // CELL_SIZE
-    return [(row, col), (row, col + 1), (row + 1, col), (row + 1, col + 1), (row + 2, col), (row + 2, col + 1)]
+    col = game_field.calc_col(soldier['x'])
+    row = game_field.calc_row(soldier['y'])
+    return [(row + 1, col), (row + 1, col + 1), (row + 2, col), (row + 2, col + 1), (row + 3, col), (row + 3, col + 1)]
 
 
 def check_collision(soldier_cells, game_grid, object_type):
-    for row, col in soldier_cells:
-        if 0 <= row < NUM_OF_ROWS and 0 <= col < NUM_OF_COLS:
-            if game_grid[row][col] == object_type:
-                return True
+    for tup in soldier_cells:
+        if game_grid[tup[0]][tup[1]] == object_type:
+            return True
     return False

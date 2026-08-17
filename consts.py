@@ -23,8 +23,8 @@ INJURED_SOLDIER = 'injury.png'
 FLAG_IMAGE = 'flag.png'
 
 EMPTY = 0
-LANDMINE = 1
 BUSH = 0
+LANDMINE = 1
 FLAG = 2
 
 NUM_OF_LANDMINES = 20

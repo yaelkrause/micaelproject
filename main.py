@@ -49,16 +49,19 @@ def main():
             soldier.move_soldier(knight, "RIGHT")
 
         if not show_mines:
-            if soldier.check_collision(soldier.get_legs_cells(knight), game_field.game_grid, LANDMINE):
+            if soldier.check_collision(soldier.get_legs_cells(knight), game_grid, LANDMINE):
                 x, y = knight['x'], knight['y']
                 knight['x'], knight['y'] =  -2*CELL_SIZE, -2*CELL_SIZE
+
                 Screen.draw_screen(grass_locations, knight)
+
                 Screen.draw_soldier(INJURED_SOLDIER, x, y)
                 Screen.draw_explosion(x, y + SOLDIER_HEIGHT)
+
                 Screen.draw_win_lose_message("Game Over! You hit a landmine.")
                 running = False
 
-            elif soldier.check_collision(soldier.get_body_cells(knight), game_field.game_grid, FLAG):
+            elif soldier.check_collision(soldier.get_body_cells(knight),      game_grid, FLAG):
                 Screen.draw_win_lose_message("Victory! You reached the flag.")
                 running = False
 
