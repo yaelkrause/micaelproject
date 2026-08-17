@@ -4,11 +4,14 @@ import Screen
 
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
+
 def calc_y(row):
     return row * CELL_SIZE
 
+
 def calc_x(col):
     return col * CELL_SIZE
+
 
 def draw_underground_screen(landmines_locations, knight):
     screen.fill(UNDERGROUND_BACKGROUND_COLOR)
@@ -25,7 +28,7 @@ def draw_underground_screen(landmines_locations, knight):
     sized_landmine = pygame.transform.scale(landmine, (LANDMINE_WIDTH, LANDMINE_HEIGHT))
     for mine in landmines_locations:
         # Align landmine drawing correctly based on its position
-        landmine_image_rect = sized_landmine.get_rect(topleft=(mine[0], mine[1]))
+        landmine_image_rect = sized_landmine.get_rect(bottomleft=(mine[0], mine[1]))
         screen.blit(sized_landmine, landmine_image_rect)
 
     # Draw soldier on underground screen using night skin

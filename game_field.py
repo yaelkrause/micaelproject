@@ -18,8 +18,9 @@ def grid_create():
 
 def generate_locations(locations):
     for mine in range(NUM_OF_LANDMINES):
+
         x = random.randint(LANDMINE_WIDTH, WINDOW_WIDTH - 3 * CELL_SIZE)
-        y = random.randint(LANDMINE_HEIGHT, WINDOW_HEIGHT - CELL_SIZE)
+        y = random.randint(LANDMINE_HEIGHT, WINDOW_HEIGHT - CELL_SIZE)//CELL_SIZE * CELL_SIZE
 
         while True:  # making sure they're not on one another
             x_locations = [location[0] for location in locations]
@@ -34,7 +35,7 @@ def generate_locations(locations):
 
             if overlap:
                 x = random.randint(CELL_SIZE, WINDOW_WIDTH - 3 * CELL_SIZE)
-                y = random.randint(CELL_SIZE, WINDOW_HEIGHT - CELL_SIZE)
+                y = random.randint(CELL_SIZE, WINDOW_HEIGHT - CELL_SIZE)//CELL_SIZE * CELL_SIZE
             else:
                 break
 

@@ -15,18 +15,23 @@ def main():
     game_field.add_flag_to_grid()
 
     running = True
-    show_mines = False
-    mine_timer = 0
+    '''show_mines = False
+    mine_timer = 0'''
 
+    #get landmine location
     landmines_locations = []
     game_field.generate_locations(landmines_locations)
     game_field.add_objects_to_grid(landmines_locations)
 
+    #get grass location
     grass_locations = []
     game_field.generate_locations(grass_locations)
 
+    #draw welcome screen
     Screen.draw_screen(grass_locations, knight)
     Screen.draw_welcome_message()
+
+    Screen.draw_screen(grass_locations, knight)
 
     while running:
         for event in pygame.event.get():
@@ -34,37 +39,36 @@ def main():
                 running = False
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and not show_mines:
-                    show_mines = True
-                    mine_timer = pygame.time.get_ticks()
+                UndergroundScreen.draw_underground_screen(landmines_locations, knight)
+                Screen.draw_screen(grass_locations, knight)
 
-                elif not show_mines:
-                    if event.key == pygame.K_UP:
-                        soldier.move_soldier(knight, "UP")
-                    elif event.key == pygame.K_DOWN:
-                        soldier.move_soldier(knight, "DOWN")
-                    elif event.key == pygame.K_LEFT:
-                        soldier.move_soldier(knight, "LEFT")
-                    elif event.key == pygame.K_RIGHT:
-                        soldier.move_soldier(knight, "RIGHT")
+            key_pressed = pygame.key.get_just_pressed()
+            if key_pressed[pygame.K_UP]:
+                soldier.move_soldier(knight, "UP")
+            elif key_pressed[pygame.K_DOWN]:
+                soldier.move_soldier(knight, "DOWN")
+            elif key_pressed[pygame.K_LEFT]:
+                soldier.move_soldier(knight, "LEFT")
+            elif key_pressed[pygame.K_RIGHT]:
+                soldier.move_soldier(knight, "RIGHT")
 
-        if not show_mines:
-            if soldier.check_collision(soldier.get_legs_cells(knight), game_field.game_grid, LANDMINE):
-                print("Game Over! You hit a landmine.")
-                pygame.time.delay(3000)
-                running = False
+        '''if not show_mines:'''
+        if soldier.check_collision(soldier.get_legs_cells(knight), game_field.game_grid, LANDMINE):
+            print("Game Over! You hit a landmine.")
+            pygame.time.delay(3000)
+            running = False
 
-            elif soldier.check_collision(soldier.get_body_cells(knight), game_field.game_grid, FLAG):
-                print("Victory! You reached the flag.")
-                pygame.time.delay(3000)
-                running = False
+        elif soldier.check_collision(soldier.get_body_cells(knight), game_field.game_grid, FLAG):
+            print("Victory! You reached the flag.")
+            pygame.time.delay(3000)
+            running = False
 
-        if show_mines:
+        '''if show_mines:
             UndergroundScreen.draw_underground_screen(landmines_locations, knight)
             if pygame.time.get_ticks() - mine_timer > 1000:
                 show_mines = False
-        else:
-            Screen.draw_screen(grass_locations, knight)
+        else:'''
+        pygame.display.flip()
 
     pygame.quit()
 
