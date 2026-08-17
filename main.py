@@ -52,13 +52,13 @@ def main():
 
         if not show_mines:
             if soldier.check_collision(soldier.get_legs_cells(knight), game_field.game_grid, LANDMINE):
-                print("Game Over! You hit a landmine.")
-                pygame.time.delay(3000)
+                Screen.draw_explosion(knight['x'], knight['y'] - 4*CELL_SIZE)
+                Screen.draw_soldier(INJURED_SOLDIER, knight['x'], knight['y'])
+                Screen.draw_win_lose_message("Game Over! You hit a landmine.")
                 running = False
 
             elif soldier.check_collision(soldier.get_body_cells(knight), game_field.game_grid, FLAG):
-                print("Victory! You reached the flag.")
-                pygame.time.delay(3000)
+                Screen.draw_win_lose_message("Victory! You reached the flag.")
                 running = False
 
         if show_mines:
