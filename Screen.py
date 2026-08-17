@@ -1,39 +1,68 @@
-'''import soldier'''
+import random
 from consts import *
-import pygame
+
+game_grid = []
+
+def grid_create():
+    for row1 in range(NUM_OF_ROWS):
+        grid_row = []
+
+        for col1 in range(NUM_OF_COLS):
+            grid_row.append(EMPTY)
+
+        game_grid.append(grid_row)
+    
+    return game_grid  # Added return statement so main.py gets the matrix
 
 
-clock = pygame.time.Clock()
-screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+def generate_locations(locations):
+    for mine in range(NUM_OF_LANDMINES):
+        x = random.randint(LANDMINE_WIDTH, WINDOW_WIDTH - 3 * CELL_SIZE)
+        y = random.randint(LANDMINE_HEIGHT, WINDOW_HEIGHT - CELL_SIZE)
+
+        while True: #making sure they're not on one another
+            x_locations = [location[0] for location in locations]
+            y_locations = [location[1] for location in locations]
+
+            overlap = False
+            for i in range(x, x+4):
+                if i in x_locations:
+                    overlap = True
+            if y in y_locations:
+                overlap = True
+
+            if overlap:
+                x = random.randint(CELL_SIZE, WINDOW_WIDTH - 3 * CELL_SIZE)
+                y = random.randint(CELL_SIZE, WINDOW_HEIGHT - CELL_SIZE)
+            else:
+                break
+
+        location = (x, y)
+        locations.append(location)
+
+    return locations
 
 
-def draw_screen(locations, knight):
-    screen.fill(FIELD_BACKGROUND_COLOR)
-
-    grass = pygame.image.load(GRASS)
-    sized_grass = pygame.transform.scale(grass, (LANDMINE_WIDTH, LANDMINE_HEIGHT))
-    for grass in locations:
-        grass_image_rect = sized_grass.get_rect(center=(grass[0], grass[1]))
-        screen.blit(sized_grass, grass_image_rect)
-
-    '''soldier.get_knight_pos(knight)
-    draw_soldier(SOLDIER, knight[0], knight[1])'''
-
-    pygame.display.flip()
-    clock.tick(30)
+def calc_row(y):
+    return y // CELL_SIZE
 
 
-def draw_welcome_message():
-    font = pygame.font.SysFont("Arial", 10)
-    welcome_str = 'Welcome to The Flag Game!\nHave fun!'
-    txt_surface = font.render(welcome_str, True, color=(0, 0, 0))
-    screen.blit(txt_surface, (3*CELL_SIZE, 0))
-    pygame.display.flip()
-    pygame.time.delay(2000)
+def calc_col(x):
+    return x // CELL_SIZE
 
 
-def draw_soldier(img, x, y):
-    knight = pygame.image.load(img)
-    sized_knight = pygame.transform.scale(knight, (SOLDIER_WIDTH, SOLDIER_HEIGHT))
-    knight_image_rect = sized_knight.get_rect(center=(x + CELL_SIZE, y + 2*CELL_SIZE))
-    screen.blit(sized_knight, knight_image_rect)
+def add_objects_to_grid(locations):
+    for mine in locations:
+        col1 = calc_col(mine[0])
+        row1 = calc_row(mine[1])
+        for i in range(col1, min(col1 + 3, NUM_OF_COLS)):
+            if 0 <= row1 < NUM_OF_ROWS:
+                game_grid[row1][i] = LANDMINE
+
+
+def add_flag_to_grid():
+    start_row = NUM_OF_ROWS - 3
+    start_col = NUM_OF_COLS - 4
+    for r in range(start_row, NUM_OF_ROWS):
+        for c in range(start_col, NUM_OF_COLS):
+            game_grid[r][c] = FLAG
