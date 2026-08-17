@@ -1,3 +1,4 @@
+import leaf
 import pygame
 import Screen
 import UndergroundScreen
@@ -16,7 +17,6 @@ def main():
 
     running = True
     show_mines = False
-    mine_timer = 0
     clock = pygame.time.Clock()
 
     landmines_locations = []
@@ -38,7 +38,6 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and not show_mines:
                     show_mines = True
-                    mine_timer = pygame.time.get_ticks()
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
@@ -52,8 +51,11 @@ def main():
 
         if not show_mines:
             if soldier.check_collision(soldier.get_legs_cells(knight), game_field.game_grid, LANDMINE):
-                Screen.draw_explosion(knight['x'], knight['y'] - 4*CELL_SIZE)
-                Screen.draw_soldier(INJURED_SOLDIER, knight['x'], knight['y'])
+                x, y = knight['x'], knight['y']
+                knight['x'], knight['y'] =  -2*CELL_SIZE, -2*CELL_SIZE
+                Screen.draw_screen(grass_locations, knight)
+                Screen.draw_soldier(INJURED_SOLDIER, x, y)
+                Screen.draw_explosion(x, y + SOLDIER_HEIGHT)
                 Screen.draw_win_lose_message("Game Over! You hit a landmine.")
                 running = False
 

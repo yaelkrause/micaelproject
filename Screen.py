@@ -52,6 +52,6 @@ def draw_explosion(x, y):
 def draw_win_lose_message(string):
     font = pygame.font.SysFont("Arial", 50)
     txt_surface = font.render(string, True, color=(0, 0, 0))
-    screen.blit(txt_surface, (200, WINDOW_HEIGHT / 2))
+    screen.blit(txt_surface, (200, WINDOW_HEIGHT / 2 - 50))
     pygame.display.flip()
     pygame.time.delay(3000)
