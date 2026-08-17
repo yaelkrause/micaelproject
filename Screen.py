@@ -23,6 +23,7 @@ def draw_screen(locations, knight, img):
 
 def draw_welcome_message():
     font = pygame.font.SysFont('vivaldi', 30, bold=True)
+    pygame.mixer.music.play(-1)
     welcome_str = 'Welcome to The Flag Game!\nHave fun!'
     txt_surface = font.render(welcome_str, True, color=(255, 255, 255))
     screen.blit(txt_surface, (3*CELL_SIZE, CELL_SIZE/2))
