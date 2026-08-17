@@ -1,3 +1,5 @@
+import pygame.mixer
+
 CELL_SIZE = 20
 NUM_OF_ROWS = 25
 NUM_OF_COLS = 50
@@ -29,3 +31,8 @@ LANDMINE = 1
 FLAG = 2
 
 NUM_OF_LANDMINES = 20
+
+pygame.mixer.init()
+LOSE_SOUND = pygame.mixer.Sound("lose_sound.mp3")
+WIN_SOUND = pygame.mixer.Sound("win_sound.mp3")
+pygame.mixer.music.load("backround_music.mp3")

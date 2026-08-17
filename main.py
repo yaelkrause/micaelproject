@@ -50,15 +50,17 @@ def main():
 
         if not show_mines:
             if soldier.check_collision(soldier.get_legs_cells(knight), game_grid, LANDMINE):
-
+                pygame.mixer.music.pause()
                 Screen.draw_screen(grass_locations, knight, INJURED_SOLDIER)
                 Screen.draw_explosion(knight['x'], knight['y'] + SOLDIER_HEIGHT)
-
+                LOSE_SOUND.play()
                 Screen.draw_win_lose_message("Game Over! You hit a landmine.", (32, WINDOW_HEIGHT / 2 - 50),
                                              'jokerman',60)
                 running = False
 
             elif soldier.check_collision(soldier.get_body_cells(knight), game_grid, FLAG):
+                pygame.mixer.music.pause()
+                WIN_SOUND.play()
                 Screen.draw_win_lose_message("Victory! you reached the flag.", (105, WINDOW_HEIGHT / 2 - 100),
                                              'parchment', 150)
                 running = False
