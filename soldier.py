@@ -28,13 +28,13 @@ def move_soldier(soldier, direction):
 def get_legs_cells(soldier):
     col = soldier["x"] // CELL_SIZE
     row = soldier["y"] // CELL_SIZE
-    return [(row + 2, col), (row + 2, col + 1), (row + 3, col), (row + 3, col + 1)]
+    return [(row + 3, col), (row + 3, col + 1)]
 
 
 def get_body_cells(soldier):
     col = soldier["x"] // CELL_SIZE
     row = soldier["y"] // CELL_SIZE
-    return [(row, col), (row, col + 1), (row + 1, col), (row + 1, col + 1)]
+    return [(row, col), (row, col + 1), (row + 1, col), (row + 1, col + 1), (row + 2, col), (row + 2, col + 1)]
 
 
 def check_collision(soldier_cells, game_grid, object_type):

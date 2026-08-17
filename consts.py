@@ -20,6 +20,7 @@ SOLDIER = 'soldier.png'
 UNDERGROUND_SOLDIER = 'soldier_night.png'
 EXPLOSION = 'explotion.png'
 INJURED_SOLDIER = 'injury.png'
+FLAG_IMAGE = 'flag.png'
 
 EMPTY = 0
 LANDMINE = 1

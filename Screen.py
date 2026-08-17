@@ -14,6 +14,7 @@ def draw_screen(locations, knight):
         grass_image_rect = sized_grass.get_rect(topleft=(grass[0], grass[1]))
         screen.blit(sized_grass, grass_image_rect)
 
+    draw_flag(FLAG_IMAGE, (NUM_OF_COLS - 4) * CELL_SIZE, (NUM_OF_ROWS - 3.5) * CELL_SIZE)
     draw_soldier(SOLDIER, knight['x'], knight['y'])
 
     pygame.display.flip()
@@ -34,6 +35,11 @@ def draw_soldier(img, x, y):
     knight_image_rect = sized_knight.get_rect(topleft=(x, y))
     screen.blit(sized_knight, knight_image_rect)
 
+def draw_flag(img, x, y):
+    flag = pygame.image.load(img)
+    sized_flag = pygame.transform.scale(flag, (4 * CELL_SIZE, 3 * CELL_SIZE))
+    flag_image_rect = sized_flag.get_rect(topleft=(x, y))
+    screen.blit(sized_flag, flag_image_rect)
 
 def add_flag_to_grid(game_grid):
     start_row = NUM_OF_ROWS - 3
