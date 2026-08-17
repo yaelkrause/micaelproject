@@ -39,6 +39,7 @@ def get_body_cells(soldier):
 
 def check_collision(soldier_cells, game_grid, object_type):
     for tup in soldier_cells:
-        if game_grid[tup[0]][tup[1]] == object_type:
-            return True
+        if tup[0] in range(NUM_OF_ROWS) and tup[1] in range(NUM_OF_COLS):
+            if game_grid[tup[0]][tup[1]] == object_type:
+                return True
     return False

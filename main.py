@@ -25,9 +25,9 @@ def main():
     grass_locations = []
     game_field.generate_locations(grass_locations)
 
-    Screen.draw_screen(grass_locations, knight)
+    Screen.draw_screen(grass_locations, knight, SOLDIER)
     Screen.draw_welcome_message()
-    Screen.draw_screen(grass_locations, knight)
+    Screen.draw_screen(grass_locations, knight, SOLDIER)
 
     while running:
         for event in pygame.event.get():
@@ -50,19 +50,17 @@ def main():
 
         if not show_mines:
             if soldier.check_collision(soldier.get_legs_cells(knight), game_grid, LANDMINE):
-                x, y = knight['x'], knight['y']
-                knight['x'], knight['y'] =  -2*CELL_SIZE, -2*CELL_SIZE
 
-                Screen.draw_screen(grass_locations, knight)
+                Screen.draw_screen(grass_locations, knight, INJURED_SOLDIER)
+                Screen.draw_explosion(knight['x'], knight['y'] + SOLDIER_HEIGHT)
 
-                Screen.draw_soldier(INJURED_SOLDIER, x, y)
-                Screen.draw_explosion(x, y + SOLDIER_HEIGHT)
-
-                Screen.draw_win_lose_message("Game Over! You hit a landmine.")
+                Screen.draw_win_lose_message("Game Over! You hit a landmine.", (25, WINDOW_HEIGHT / 2 - 50),
+                                             'jokerman',50)
                 running = False
 
-            elif soldier.check_collision(soldier.get_body_cells(knight),      game_grid, FLAG):
-                Screen.draw_win_lose_message("Victory! You reached the flag.")
+            elif soldier.check_collision(soldier.get_body_cells(knight), game_grid, FLAG):
+                Screen.draw_win_lose_message("Victory! you reached the flag.", (60, WINDOW_HEIGHT / 2 - 50),
+                                             'parchment', 100)
                 running = False
 
         if show_mines:
@@ -71,7 +69,7 @@ def main():
             pygame.time.delay(1000)
             show_mines = False
         else:
-            Screen.draw_screen(grass_locations, knight)
+            Screen.draw_screen(grass_locations, knight, SOLDIER)
 
         pygame.display.flip()
 
