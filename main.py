@@ -63,9 +63,9 @@ def main():
 
         if show_mines:
             UndergroundScreen.draw_underground_screen(landmines_locations, knight)
-
-            if pygame.time.get_ticks() - mine_timer > 1000:
-                show_mines = False
+            pygame.display.flip()
+            pygame.time.delay(1000)
+            show_mines = False
         else:
             Screen.draw_screen(grass_locations, knight)
 
