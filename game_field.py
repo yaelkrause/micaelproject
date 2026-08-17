@@ -20,7 +20,7 @@ def generate_locations(locations):
     for mine in range(NUM_OF_LANDMINES):
 
         x = random.randint(LANDMINE_WIDTH, WINDOW_WIDTH - 3 * CELL_SIZE)
-        y = random.randint(LANDMINE_HEIGHT, WINDOW_HEIGHT)//CELL_SIZE * CELL_SIZE
+        y = round(random.randint(LANDMINE_HEIGHT, WINDOW_HEIGHT)/CELL_SIZE) * CELL_SIZE
 
         while True:  # making sure they're not on one another
             x_locations = [location[0] for location in locations]
@@ -35,7 +35,7 @@ def generate_locations(locations):
 
             if overlap:
                 x = random.randint(CELL_SIZE, WINDOW_WIDTH - 3 * CELL_SIZE)
-                y = random.randint(CELL_SIZE, WINDOW_HEIGHT)//CELL_SIZE * CELL_SIZE
+                y = round(random.randint(LANDMINE_HEIGHT, WINDOW_HEIGHT)/CELL_SIZE) * CELL_SIZE
             else:
                 break
 
@@ -46,11 +46,11 @@ def generate_locations(locations):
 
 
 def calc_row(y):
-    return y // CELL_SIZE
+    return round(y / CELL_SIZE)
 
 
 def calc_col(x):
-    return x // CELL_SIZE
+    return round(x / CELL_SIZE)
 
 
 def add_objects_to_grid(locations):
@@ -58,7 +58,7 @@ def add_objects_to_grid(locations):
         col1 = calc_col(mine[0])
         row1 = calc_row(mine[1])
         for i in range(col1, min(col1 + 3, NUM_OF_COLS)):
-            if 0 <= row1 < NUM_OF_ROWS:
+            if row1 in range(NUM_OF_ROWS):
                 game_grid[row1][i] = LANDMINE
 
 

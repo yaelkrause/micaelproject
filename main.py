@@ -54,13 +54,13 @@ def main():
                 Screen.draw_screen(grass_locations, knight, INJURED_SOLDIER)
                 Screen.draw_explosion(knight['x'], knight['y'] + SOLDIER_HEIGHT)
 
-                Screen.draw_win_lose_message("Game Over! You hit a landmine.", (25, WINDOW_HEIGHT / 2 - 50),
-                                             'jokerman',50)
+                Screen.draw_win_lose_message("Game Over! You hit a landmine.", (32, WINDOW_HEIGHT / 2 - 50),
+                                             'jokerman',60)
                 running = False
 
             elif soldier.check_collision(soldier.get_body_cells(knight), game_grid, FLAG):
-                Screen.draw_win_lose_message("Victory! you reached the flag.", (60, WINDOW_HEIGHT / 2 - 50),
-                                             'parchment', 100)
+                Screen.draw_win_lose_message("Victory! you reached the flag.", (105, WINDOW_HEIGHT / 2 - 100),
+                                             'parchment', 150)
                 running = False
 
         if show_mines:
